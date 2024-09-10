@@ -26,7 +26,7 @@
     "@protobuf-ts/plugin-framework": "^2.0.7",
     "camel-case": "^4.1.2",
     "dot-object": "^2.1.4",
-    "path-to-regexp": "^6.2.0",
+    "path-to-regexp": "^8.1.0",
     "ts-poet": "^4.5.0",
     "yaml": "^1.10.2"
   },

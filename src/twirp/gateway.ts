@@ -1,7 +1,7 @@
 import * as http from "http";
 import { parse } from "querystring";
 import * as dotObject from "dot-object";
-import { MatchFunction, MatchResult } from "path-to-regexp";
+import { MatchFunction, MatchResult, ParamData } from "path-to-regexp";
 import { getRequestData } from "./request";
 import {
   BadRouteError,
@@ -25,7 +25,7 @@ export interface HttpRoute {
   methodName: string;
   packageName: string;
   matchingPath: string;
-  matcher: MatchFunction;
+  matcher: MatchFunction<ParamData>;
   httpMethod: Pattern;
   bodyKey?: string;
   responseBodyKey?: string;
@@ -150,7 +150,7 @@ export class Gateway {
    */
   protected async prepareTwirpBody(
     req: http.IncomingMessage,
-    match: MatchResult,
+    match: MatchResult<ParamData>,
     route: HttpRoute
   ): Promise<Record<string, any>> {
     const { query_string, ...params } = match.params as Record<string, any>;
@@ -189,7 +189,7 @@ export class Gateway {
    * Matches a route
    * @param req
    */
-  matchRoute(req: http.IncomingMessage): [MatchResult, HttpRoute] {
+  matchRoute(req: http.IncomingMessage): [MatchResult<ParamData>, HttpRoute] {
     const httpMethod = req.method?.toLowerCase() as Pattern;
 
     if (!httpMethod) {

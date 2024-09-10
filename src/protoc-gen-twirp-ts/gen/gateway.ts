@@ -1,7 +1,7 @@
 import { FileDescriptorProto } from "@protobuf-ts/plugin-framework";
 import {writeFileSync} from  "fs"
 import { code, imp, joinCode } from "ts-poet";
-import { match, MatchFunction } from "path-to-regexp";
+import { match, MatchFunction, ParamData } from "path-to-regexp";
 
 const Gateway = imp("Gateway@twirp-ts");
 const GatewayPattern = imp("Pattern@twirp-ts");
@@ -22,7 +22,7 @@ export interface HttpRoute {
   methodName: string
   packageName: string
   matchingPath: string
-  matcher: MatchFunction
+  matcher: MatchFunction<ParamData>
   httpMethod: Pattern
   bodyKey?: string
   responseBodyKey?: string
